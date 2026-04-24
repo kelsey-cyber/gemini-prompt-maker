@@ -1,0 +1,44 @@
+# Gemini Prompt Builder — Nectar Life
+
+AI-powered Gemini image prompt generator. Upload reference and product images, describe what you want, get a ready-to-copy prompt.
+
+## Deploy to Vercel
+
+### 1. Push to GitHub
+
+```bash
+git init
+git add .
+git commit -m "Initial commit"
+gh repo create gemini-prompt-builder --public --push
+```
+
+Or create the repo manually on github.com and push.
+
+### 2. Deploy on Vercel
+
+1. Go to vercel.com and click **Add New Project**
+2. Import your GitHub repo
+3. Vercel will auto-detect the config — no build settings needed
+4. Before deploying, add your environment variable:
+   - Key: `ANTHROPIC_API_KEY`
+   - Value: your Anthropic API key (from console.anthropic.com)
+5. Click **Deploy**
+
+### 3. Done
+
+Your tool will be live at `your-project-name.vercel.app`.
+
+## Project Structure
+
+```
+/api/chat.js        — Vercel serverless function (proxies Anthropic API)
+/public/index.html  — Frontend chat interface
+/vercel.json        — Vercel routing config
+```
+
+## How it works
+
+- API key lives in Vercel environment variables — never exposed in the frontend
+- `/api/chat` proxies requests to Anthropic server-side
+- Frontend calls `/api/chat`, not Anthropic directly
